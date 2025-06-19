@@ -1,15 +1,22 @@
 import { Navigate, Outlet } from 'react-router'
+import Navbar from '../components/Navbar'
+import Footer from '../components/Footer'
 
 const isAuthenticated = () => {
-  // Later, replace this with real auth check
   return localStorage.getItem('token')
 }
 
 const ProtectedLayout = () => {
-  return isAuthenticated() ? (
-    <Outlet />
-  ) : (
-    <Navigate to="/" />
+  if (!isAuthenticated()) return <Navigate to="/login" />
+
+  return (
+    <div className="min-h-screen flex flex-col">
+      <header><Navbar /></header>
+      <main className="flex-grow container mx-auto px-4 py-6">
+        <Outlet />
+      </main>
+      <Footer />
+    </div>
   )
 }
 

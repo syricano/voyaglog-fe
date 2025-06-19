@@ -5,6 +5,7 @@ import Home from './pages/Home'
 import About from './pages/About'
 import BlogDetails from './pages/BlogDetails'
 import Dashboard from './pages/Dashboard'
+import Login from './pages/Login'
 
 
 
@@ -17,6 +18,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/blog/:id" element={<BlogDetails />} />
+          <Route path="/login" element={<Login />} />
         </Route>
 
         {/* Protected Routes with Auth Layout */}
