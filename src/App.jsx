@@ -6,6 +6,7 @@ import About from './pages/About'
 import BlogDetails from './pages/BlogDetails'
 import Dashboard from './pages/Dashboard'
 import Login from './pages/Login'
+import Signup from './pages/signup';
 
 
 
@@ -19,6 +20,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/blog/:id" element={<BlogDetails />} />
           <Route path="/login" element={<Login />} />
+          <Route path='/signup' element={<Signup/>}/>
         </Route>
 
         {/* Protected Routes with Auth Layout */}
