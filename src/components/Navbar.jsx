@@ -1,4 +1,6 @@
 import { Link, useNavigate } from 'react-router'
+import ThemeToggle from './ThemeToggle'
+
 
 const Navbar = () => {
   const navigate = useNavigate()
@@ -24,6 +26,7 @@ const Navbar = () => {
           ) : (
             <Link to="/login" className="btn btn-primary btn-sm text-white">Login</Link>
           )}
+          <ThemeToggle />
         </div>
       </div>
     </div>
