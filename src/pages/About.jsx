@@ -1,4 +1,6 @@
 import about from "../assets/about.jpg"
+import voyagStyle from "../style/voyagStyle"
+
 const About = () => {
   return (
     <div className="max-w-4xl mx-auto p-8 mt-10 bg-base-200 rounded shadow-md flex-1/2">
@@ -15,17 +17,9 @@ const About = () => {
       <p className="mb-4 text-lg leading-relaxed  hover:text-primary transition-colors duration-300 cursor-pointer">
         Thank you for joining us on this journey — happy travels!
       </p>
-      {/* Use imported variable here */}
-      <img src={about} alt="About us" className="w-full md:w-1/2
-    rounded-lg
-    shadow-lg
-    hover:scale-105
-    transition-transform
-    duration-300
-    ease-in-out
-    cursor-pointer" />
-
-      {/* ... rest of content */}
+      
+      <img src={about} alt="About us" className={voyagStyle.img} />
+     
       
     </div>
   )

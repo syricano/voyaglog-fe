@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import voyagStyle from '../style/voyagStyle'
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -31,7 +32,7 @@ const Contact = () => {
 
   return (
     <div className="max-w-lg mx-auto p-6 mt-10 bg-base-200 rounded shadow-md">
-      <h1 className="text-3xl font-semibold mb-6">Contact Us</h1>
+      <h1 className={voyagStyle.heroTitle}>Contact Us</h1>
 
       {status === 'success' && (
         <p className="mb-4 text-green-600">Thanks for your message! We will get back to you soon.</p>
