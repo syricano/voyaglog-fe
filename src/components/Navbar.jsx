@@ -16,11 +16,14 @@ const Navbar = () => {
   }
 
   return (
-    <nav className="bg-base-100 shadow">
+    <nav className="bg-base-100 shadow-md sticky top-0 z-50 backdrop-blur-md bg-opacity-90 transition-colors duration-300">
       <div className="container mx-auto flex justify-between items-center p-4">
         {/* Logo */}
-        <div className="flex items-center gap-2">
-          <Link to="/" className="text-xl font-bold">
+        <div className="flex items-center gap-3">
+          <Link
+            to="/"
+            className="text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:brightness-110 transition-all duration-300"
+          >
             Voyaglog
           </Link>
           <ThemeToggle />
@@ -28,11 +31,24 @@ const Navbar = () => {
 
         {/* Desktop Menu */}
         <div className="hidden md:flex space-x-6 items-center">
-          <Link to="/" className="btn btn-ghost btn-sm">Home</Link>
-          <Link to="/about" className="btn btn-ghost btn-sm">About</Link>
+          <Link
+            to="/"
+            className="btn btn-ghost btn-sm px-4 rounded-md  hover:text-primary hover:bg-primary/10 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 transition"
+          >
+            Home
+          </Link>
+          <Link
+            to="/about"
+            className="btn btn-ghost btn-sm px-4 rounded-md  hover:text-primary hover:bg-primary/10 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 transition"
+          >
+            About
+          </Link>
 
           {isLoggedIn && (
-            <Link to="/dashboard" className="btn btn-ghost btn-sm">
+            <Link
+              to="/dashboard"
+              className="btn btn-ghost btn-sm px-4 rounded-md  hover:text-primary hover:bg-primary/10 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 transition"
+            >
               Dashboard
             </Link>
           )}
@@ -40,17 +56,22 @@ const Navbar = () => {
           {isLoggedIn ? (
             <button
               onClick={handleLogout}
-              className="btn btn-error btn-sm text-white"
+              className="btn btn-error btn-sm px-4 rounded-md text-white shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-error focus:ring-offset-1 transition"
             >
               Logout
             </button>
           ) : (
             <>
-              <Link to="/login" className="btn btn-primary btn-sm text-white">
+              <Link
+                to="/login"
+                className="btn btn-primary btn-sm px-4 rounded-md text-white shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 transition"
+              >
                 Login
               </Link>
-              
-              <Link to="/signup" className="btn btn-secondary btn-sm">
+              <Link
+                to="/signup"
+                className="btn btn-secondary btn-sm px-4 rounded-md text-white shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-1 transition"
+              >
                 Signup
               </Link>
             </>
@@ -59,19 +80,18 @@ const Navbar = () => {
 
         {/* Mobile Burger Button */}
         <button
-          className="md:hidden btn btn-ghost btn-square"
+          className="md:hidden btn btn-ghost btn-square p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 transition"
           onClick={() => setIsOpen(!isOpen)}
           aria-label="Toggle menu"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6"
+            className="h-6 w-6 text-gray-700"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
           >
             {isOpen ? (
-              // X icon
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -79,7 +99,6 @@ const Navbar = () => {
                 d="M6 18L18 6M6 6l12 12"
               />
             ) : (
-              // Hamburger icon
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -93,63 +112,64 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden bg-base-200 px-4 py-3 space-y-2">
-          <Link
-            to="/"
-            className="block btn btn-ghost w-full"
-            onClick={() => setIsOpen(false)}
-          >
-            Home
-          </Link>
-          <Link
-            to="/about"
-            className="block btn btn-ghost w-full"
-            onClick={() => setIsOpen(false)}
-          >
-            About
-          </Link>
+      <div className="md:hidden bg-base-200 px-4 py-3 space-y-2 shadow-inner border-t border-base-300">
+        <Link
+          to="/"
+          className="block btn btn-ghost w-full rounded-md text-gray-700 hover:text-primary hover:bg-primary/10 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 transition"
+          onClick={() => setIsOpen(false)}
+        >
+          Home
+        </Link>
+        <Link
+          to="/about"
+          className="block btn btn-ghost w-full rounded-md  hover:text-primary hover:bg-primary/10 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 transition"
+          onClick={() => setIsOpen(false)}
+        >
+          About
+        </Link>
 
-          {isLoggedIn && (
+        {isLoggedIn && (
+          <Link
+            to="/dashboard"
+            className="block btn btn-ghost w-full rounded-md  hover:text-primary hover:bg-primary/10 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 transition"
+            onClick={() => setIsOpen(false)}
+          >
+            Dashboard
+          </Link>
+        )}
+
+        {isLoggedIn ? (
+          <button
+            onClick={() => {
+              handleLogout()
+              setIsOpen(false)
+            }}
+            className="btn btn-error w-full rounded-md text-white shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-error focus:ring-offset-1 transition"
+          >
+            Logout
+          </button>
+        ) : (
+          <>
             <Link
-              to="/dashboard"
-              className="block btn btn-ghost w-full"
+              to="/login"
+              className="block btn btn-primary w-full rounded-md text-white shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 transition"
               onClick={() => setIsOpen(false)}
             >
-              Dashboard
+              Login
             </Link>
-          )}          
-
-          {isLoggedIn ? (
-            <button
-              onClick={() => {
-                handleLogout()
-                setIsOpen(false)
-              }}
-              className="btn btn-error w-full text-white"
+            <Link
+              to="/signup"
+              className="block btn btn-secondary w-full rounded-md text-white shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-1 transition"
+              onClick={() => setIsOpen(false)}
             >
-              Logout
-            </button>
-          ) : (
-            <>
-              <Link
-                to="/login"
-                className="block btn btn-primary w-full text-white"
-                onClick={() => setIsOpen(false)}
-              >
-                Login
-              </Link>
-              <Link
-                to="/signup"
-                className="block btn btn-secondary w-full"
-                onClick={() => setIsOpen(false)}
-              >
-                Signup
-              </Link>
-            </>
-          )}
-        </div>
+              Signup
+            </Link>
+          </>
+        )}
+      </div>
       )}
     </nav>
+
   )
 }
 
