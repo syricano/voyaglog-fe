@@ -4,8 +4,11 @@ import voyagStyle from '../style/voyagStyle'
 
 const Signup = () => {
   const [formData, setFormData] = useState({
+    firstName: '',
+    lastName:'',
     username: '',
     email: '',
+    phone:'',
     password: '',
     confirmPassword: '',
   })
@@ -40,42 +43,13 @@ const Signup = () => {
       <h2 className={voyagStyle.signupTitle}>Sign Up</h2>
       {error && <p className={voyagStyle.errorText}>{error}</p>}
       <form onSubmit={handleSubmit} className={voyagStyle.form}>
-        <input
-          type="text"
-          name="username"
-          placeholder="Username"
-          value={formData.username}
-          onChange={handleChange}
-          className={voyagStyle.input}
-          required
-        />
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={formData.email}
-          onChange={handleChange}
-          className={voyagStyle.input}
-          required
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={formData.password}
-          onChange={handleChange}
-          className={voyagStyle.input}
-          required
-        />
-        <input
-          type="password"
-          name="confirmPassword"
-          placeholder="Confirm Password"
-          value={formData.confirmPassword}
-          onChange={handleChange}
-          className={voyagStyle.input}
-          required
-        />
+        <input type="text" name="firstName" placeholder="First Name" value={formData.firstName} onChange={handleChange} className={voyagStyle.input} required/>
+        <input type="text" name="lastName" placeholder="Last Name" value={formData.lasttName} onChange={handleChange} className={voyagStyle.input} required/>
+        <input type="text" name="username" placeholder="Username" value={formData.username} onChange={handleChange} className={voyagStyle.input} required/>
+        <input type="phone" name="phone" placeholder="phone" value={formData.phone} onChange={handleChange} className={voyagStyle.input} />
+        <input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange} className={voyagStyle.input} required/>
+        <input type="password" name="password" placeholder="Password" value={formData.password} onChange={handleChange} className={voyagStyle.input} required/>
+        <input type="password" name="confirmPassword" placeholder="Confirm Password" value={formData.confirmPassword} onChange={handleChange} className={voyagStyle.input} required/>
         <button type="submit" className={voyagStyle.submitButton}>
           Sign Up
         </button>
