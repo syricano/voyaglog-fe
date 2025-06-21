@@ -19,7 +19,7 @@ const Signup = () => {
     setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }))
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     setError('')
 
@@ -27,16 +27,41 @@ const Signup = () => {
       setError('Passwords do not match')
       return
     }
-    if (!formData.email || !formData.username || !formData.password) {
+    if (!formData.firstName || !formData.lastName || !formData.email || !formData.username || !formData.password) {
       setError('Please fill in all fields')
       return
     }
 
     // TODO: Call your signup API here
 
-    alert('Signup successful! Please login.')
-    navigate('/login')
+    try {
+      const response = await fetch('http://localhost:8080/api/users', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          username: formData.username,
+          email: formData.email,
+          phone: formData.phone,
+          password: formData.password
+        }),
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        setError(data.error || 'Signup failed')
+      } else {
+        alert('Signup successful! Please login.')
+        navigate('/login')
+      }
+    } catch (err) {
+      console.error('Signup error:', err)
+      setError('Signup failed. Please try again later.')
+    }
   }
+  
 
   return (
     <div className={voyagStyle.signupWrapper}>
