@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router'
 import { Link } from 'react-router'
+import voyagStyle from '../style/voyagStyle'
 
 const Login = () => {
   const navigate = useNavigate()
@@ -11,17 +12,16 @@ const Login = () => {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen">
-      <div className="card w-96 bg-base-100 shadow-md p-6">
-        
-        <p className="mt-4 text-center text-sm">
+    <div className={voyagStyle.loginContainer}>
+      <div className={voyagStyle.loginCard}>
+        <p className={voyagStyle.loginText}>
           Don’t have an account?{' '}
-          <Link to="/signup" className="text-primary underline">
+          <Link to="/signup" className={voyagStyle.loginLink}>
             Sign up here
           </Link>
         </p>
-        <h2 className="text-xl font-semibold mb-4">Login</h2>
-        <button onClick={handleLogin} className="btn btn-primary w-full">
+        <h2 className={voyagStyle.loginTitle}>Login</h2>
+        <button onClick={handleLogin} className={voyagStyle.loginButton}>
           Login as Demo User
         </button>
       </div>

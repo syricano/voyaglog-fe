@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router'
+import voyagStyle from '../style/voyagStyle'
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -19,7 +20,6 @@ const Signup = () => {
     e.preventDefault()
     setError('')
 
-    // Basic validation
     if (formData.password !== formData.confirmPassword) {
       setError('Passwords do not match')
       return
@@ -31,23 +31,22 @@ const Signup = () => {
 
     // TODO: Call your signup API here
 
-    // For now, simulate success and redirect to login
     alert('Signup successful! Please login.')
     navigate('/login')
   }
 
   return (
-    <div className="max-w-md mx-auto p-4 mt-10 border rounded shadow">
-      <h2 className="text-2xl mb-4 font-semibold text-center">Sign Up</h2>
-      {error && <p className="text-red-500 mb-3">{error}</p>}
-      <form onSubmit={handleSubmit} className="space-y-4">
+    <div className={voyagStyle.signupWrapper}>
+      <h2 className={voyagStyle.signupTitle}>Sign Up</h2>
+      {error && <p className={voyagStyle.errorText}>{error}</p>}
+      <form onSubmit={handleSubmit} className={voyagStyle.form}>
         <input
           type="text"
           name="username"
           placeholder="Username"
           value={formData.username}
           onChange={handleChange}
-          className="input input-bordered w-full"
+          className={voyagStyle.input}
           required
         />
         <input
@@ -56,7 +55,7 @@ const Signup = () => {
           placeholder="Email"
           value={formData.email}
           onChange={handleChange}
-          className="input input-bordered w-full"
+          className={voyagStyle.input}
           required
         />
         <input
@@ -65,7 +64,7 @@ const Signup = () => {
           placeholder="Password"
           value={formData.password}
           onChange={handleChange}
-          className="input input-bordered w-full"
+          className={voyagStyle.input}
           required
         />
         <input
@@ -74,10 +73,10 @@ const Signup = () => {
           placeholder="Confirm Password"
           value={formData.confirmPassword}
           onChange={handleChange}
-          className="input input-bordered w-full"
+          className={voyagStyle.input}
           required
         />
-        <button type="submit" className="btn btn-primary w-full">
+        <button type="submit" className={voyagStyle.submitButton}>
           Sign Up
         </button>
       </form>

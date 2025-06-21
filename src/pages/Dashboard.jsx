@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router'
+import voyagStyle from '../style/voyagStyle'
 
 const Dashboard = () => {
   const navigate = useNavigate()
@@ -20,7 +21,6 @@ const Dashboard = () => {
   const [newBlog, setNewBlog] = useState({ title: '', content: '' })
   const [error, setError] = useState('')
 
-  // Redirect if not logged in
   useEffect(() => {
     const token = localStorage.getItem('token')
     if (!token) {
@@ -28,32 +28,24 @@ const Dashboard = () => {
     }
   }, [navigate])
 
-  // Handle personal info form change
   const handleUserChange = (e) => {
     setUser(prev => ({ ...prev, [e.target.name]: e.target.value }))
   }
 
-  // Save updated personal info
   const handleUserSubmit = (e) => {
     e.preventDefault()
     setError('')
-
-    // Simple validation example
     if (!user.firstName || !user.lastName || !user.email) {
       setError('Please fill out all required fields.')
       return
     }
-
     alert('Personal information updated!')
-    // TODO: Save to backend here
   }
 
-  // Handle new blog input change
   const handleNewBlogChange = (e) => {
     setNewBlog(prev => ({ ...prev, [e.target.name]: e.target.value }))
   }
 
-  // Add new blog
   const addBlog = () => {
     if (!newBlog.title || !newBlog.content) {
       alert('Please fill out blog title and content.')
@@ -64,28 +56,23 @@ const Dashboard = () => {
     setNewBlog({ title: '', content: '' })
   }
 
-  // Start editing a blog
   const startEditing = (blog) => {
     setEditingBlog(blog)
   }
 
-  // Handle editing blog input change
   const handleEditChange = (e) => {
     setEditingBlog(prev => ({ ...prev, [e.target.name]: e.target.value }))
   }
 
-  // Save edited blog
   const saveEdit = () => {
     setBlogs(blogs.map(b => (b.id === editingBlog.id ? editingBlog : b)))
     setEditingBlog(null)
   }
 
-  // Cancel editing
   const cancelEdit = () => {
     setEditingBlog(null)
   }
 
-  // Delete blog
   const deleteBlog = (id) => {
     if (window.confirm('Delete this blog?')) {
       setBlogs(blogs.filter(b => b.id !== id))
@@ -94,20 +81,20 @@ const Dashboard = () => {
 
   return (
     <div className="p-8 max-w-5xl mx-auto space-y-10">
-      <h1 className="text-4xl font-bold mb-8">Dashboard</h1>
+      <h1 className={voyagStyle.sectionTitle}>Dashboard</h1>
 
       {/* Personal Info Section */}
       <section className="bg-base-200 p-6 rounded shadow-md">
-        <h2 className="text-2xl font-semibold mb-4">Personal Information</h2>
-        {error && <p className="text-red-500 mb-4">{error}</p>}
-        <form onSubmit={handleUserSubmit} className="space-y-4 max-w-md">
+        <h2 className={voyagStyle.sectionTitle}>Personal Information</h2>
+        {error && <p className={voyagStyle.errorText}>{error}</p>}
+        <form onSubmit={handleUserSubmit} className={voyagStyle.form}>
           <input
             type="text"
             name="firstName"
             placeholder="First Name"
             value={user.firstName}
             onChange={handleUserChange}
-            className="input input-bordered w-full"
+            className={voyagStyle.input}
             required
           />
           <input
@@ -116,7 +103,7 @@ const Dashboard = () => {
             placeholder="Last Name"
             value={user.lastName}
             onChange={handleUserChange}
-            className="input input-bordered w-full"
+            className={voyagStyle.input}
             required
           />
           <input
@@ -125,7 +112,7 @@ const Dashboard = () => {
             placeholder="Email"
             value={user.email}
             onChange={handleUserChange}
-            className="input input-bordered w-full"
+            className={voyagStyle.input}
             required
           />
           <input
@@ -134,7 +121,7 @@ const Dashboard = () => {
             placeholder="Password (leave blank to keep)"
             value={user.password}
             onChange={handleUserChange}
-            className="input input-bordered w-full"
+            className={voyagStyle.input}
           />
           <input
             type="tel"
@@ -142,19 +129,19 @@ const Dashboard = () => {
             placeholder="Phone"
             value={user.phone}
             onChange={handleUserChange}
-            className="input input-bordered w-full"
+            className={voyagStyle.input}
           />
-          <button type="submit" className="btn btn-primary">
+          <button type="submit" className={voyagStyle.submitButton}>
             Update Information
           </button>
         </form>
       </section>
 
-      {/* Blogs Section */}
-      <section className="bg-base-200 p-6 rounded shadow-md">
-        <h2 className="text-2xl font-semibold mb-4">My Blogs</h2>
 
-        {/* Add New Blog */}
+      <section className="bg-base-200 p-6 rounded shadow-md">
+        <h2 className={voyagStyle.sectionTitle}>My Blogs</h2>
+
+
         <div className="mb-6 max-w-md space-y-2">
           <input
             type="text"
@@ -162,14 +149,14 @@ const Dashboard = () => {
             placeholder="Blog Title"
             value={newBlog.title}
             onChange={handleNewBlogChange}
-            className="input input-bordered w-full"
+            className={voyagStyle.input}
           />
           <textarea
             name="content"
             placeholder="Blog Content"
             value={newBlog.content}
             onChange={handleNewBlogChange}
-            className="textarea textarea-bordered w-full"
+            className={voyagStyle.textarea}
             rows={4}
           />
           <button onClick={addBlog} className="btn btn-success">
@@ -177,7 +164,7 @@ const Dashboard = () => {
           </button>
         </div>
 
-        {/* Blogs List */}
+
         <div className="space-y-4 max-w-3xl">
           {blogs.length === 0 && <p>No blogs yet. Add one above!</p>}
 
@@ -192,13 +179,13 @@ const Dashboard = () => {
                   name="title"
                   value={editingBlog.title}
                   onChange={handleEditChange}
-                  className="input input-bordered w-full"
+                  className={voyagStyle.input}
                 />
                 <textarea
                   name="content"
                   value={editingBlog.content}
                   onChange={handleEditChange}
-                  className="textarea textarea-bordered w-full"
+                  className={voyagStyle.textarea}
                   rows={4}
                 />
                 <div className="flex space-x-2">

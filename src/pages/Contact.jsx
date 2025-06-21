@@ -18,37 +18,38 @@ const Contact = () => {
     e.preventDefault()
     setStatus(null)
 
-    // Basic validation
     if (!formData.name || !formData.email || !formData.message) {
       setStatus('error')
       return
     }
-
-    // TODO: Implement sending message to backend or email service
 
     setStatus('success')
     setFormData({ name: '', email: '', message: '' })
   }
 
   return (
-    <div className="max-w-lg mx-auto p-6 mt-10 bg-base-200 rounded shadow-md">
+    <div className={voyagStyle.formContainer}>
       <h1 className={voyagStyle.heroTitle}>Contact Us</h1>
 
       {status === 'success' && (
-        <p className="mb-4 text-green-600">Thanks for your message! We will get back to you soon.</p>
+        <p className="mb-4 text-green-600">
+          Thanks for your message! We will get back to you soon.
+        </p>
       )}
       {status === 'error' && (
-        <p className="mb-4 text-red-600">Please fill out all fields.</p>
+        <p className="mb-4 text-red-600">
+          Please fill out all fields.
+        </p>
       )}
 
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form onSubmit={handleSubmit} className={voyagStyle.form}>
         <input
           type="text"
           name="name"
           placeholder="Your Name"
           value={formData.name}
           onChange={handleChange}
-          className="input input-bordered w-full"
+          className={voyagStyle.input}
           required
         />
         <input
@@ -57,7 +58,7 @@ const Contact = () => {
           placeholder="Your Email"
           value={formData.email}
           onChange={handleChange}
-          className="input input-bordered w-full"
+          className={voyagStyle.input}
           required
         />
         <textarea
@@ -65,11 +66,11 @@ const Contact = () => {
           placeholder="Your Message"
           value={formData.message}
           onChange={handleChange}
-          className="textarea textarea-bordered w-full"
+          className={voyagStyle.textarea}
           rows={5}
           required
         />
-        <button type="submit" className="btn btn-primary w-full">
+        <button type="submit" className={voyagStyle.submitButton}>
           Send Message
         </button>
       </form>
