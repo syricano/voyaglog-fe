@@ -35,18 +35,18 @@ const Signup = () => {
     // TODO: Call your signup API here
 
     try {
-      const response = await fetch('http://localhost:8080/api/users', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          firstName: formData.firstName,
-          lastName: formData.lastName,
-          username: formData.username,
-          email: formData.email,
-          phone: formData.phone,
-          password: formData.password
+      const response = await fetch('http://localhost:8080/api/auth/signup', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        firstName: formData.firstName.trim(),
+        lastName: formData.lastName.trim(),
+        username: formData.username.trim(),
+        email: formData.email.trim(),
+        phone: formData.phone.trim(),
+        password: formData.password,
         }),
-      })
+      });
 
       const data = await response.json()
 

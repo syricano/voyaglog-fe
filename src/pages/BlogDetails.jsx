@@ -1,32 +1,54 @@
 import { useParams } from 'react-router'
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router'
 import voyagStyle from '../style/voyagStyle'
 
 const BlogDetails = () => {
   const { id } = useParams()
+  const [blog, setBlog] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  // Fake blog data
-  const blog = {
-    title: `Blog Title ${id}`,
-    date: 'June 20, 2025',
-    author: 'Anass Muhammad Ali',
-    image: '/placeholder.jpg',
-    content: `This is the full blog content for blog post ${id}. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse a risus et urna mattis finibus.`,
-  }
+ useEffect(() => {
+    // Replace with your actual backend URL
+    const fetchPost = async () => {
+      try {
+        const res = await fetch(`http://localhost:8080/api/posts/${id}`);
+        if (!res.ok) {
+          throw new Error(`Error: ${res.status}`);
+        }
+        const data = await res.json();
+        setBlog(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPost();
+  }, [id]);
+  
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error loading post: {error}</p>;
+  if (!blog) return <p>No post found</p>;
+
 
   return (
     <div className={voyagStyle.blogDetailsWrapper}>
       <h1 className={voyagStyle.blogDetailsTitle}>{blog.title}</h1>
 
       <p className={voyagStyle.blogDetailsMeta}>
-        {blog.date} • by {blog.author}
+        {blog.date} • by {blog.author.firstName} {blog.author.lastName}
       </p>
 
-      <img
-        src={blog.image}
-        alt={blog.title}
-        className={voyagStyle.blogDetailsImage}
-      />
+      {blog.image && (
+        <img
+          src={`http://localhost:8080/uploads/${blog.image}`}
+          alt={blog.title}
+          className={voyagStyle.blogDetailsImage}
+        />
+      )}
 
       <p className={voyagStyle.blogDetailsContent}>{blog.content}</p>
 

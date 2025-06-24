@@ -8,7 +8,7 @@ import Dashboard from './pages/Dashboard'
 import Login from './pages/Login'
 import Signup from './pages/signup';
 import Contact from './pages/Contact'
-
+import Blogs from './pages/Blogs';
 
 
 function App() {
@@ -19,6 +19,7 @@ function App() {
         <Route element={<MainLayout />}>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
+          <Route path="/blogs" element={<Blogs />} />
           <Route path="/blog/:id" element={<BlogDetails />} />
           <Route path="/login" element={<Login />} />
           <Route path='/signup' element={<Signup/>}/>          

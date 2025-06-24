@@ -1,16 +1,15 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router'
-import { Link } from 'react-router'
+import { useNavigate, Link } from 'react-router'
 import voyagStyle from '../style/voyagStyle'
 
 const Login = () => {
   const navigate = useNavigate()
   const [formData, setFormData] = useState({
-    username: '', // or email depending on your backend
+    identifier: '', // username or email
     password: '',
   })
   const [error, setError] = useState('')
-  
+
   const handleChange = (e) => {
     setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }))
   }
@@ -19,30 +18,44 @@ const Login = () => {
     e.preventDefault()
     setError('')
 
-    if (!formData.username || !formData.password) {
+    if (!formData.identifier || !formData.password) {
       setError('Please fill in all fields')
       return
     }
 
     try {
-      const response = await fetch('http://localhost:8080/api/login', {
+      const response = await fetch('http://localhost:8080/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          username: formData.username,
+          identifier: formData.identifier,
           password: formData.password,
         }),
       })
 
-      const data = await response.json()
+      let data
+      try {
+        data = await response.json()
+      } catch {
+        setError('Unexpected response from server')
+        return
+      }
+
+      console.log('Login response data:', data)
 
       if (!response.ok) {
-        setError(data.error || 'Login failed')
-      } else {
-        // Assuming backend sends token here
-        localStorage.setItem('token', data.token)
-        navigate('/dashboard')
+        setError(data.error || data.message || 'Login failed')
+        return
       }
+
+      if (!data.token) {
+        setError('Login succeeded but no token received')
+        return
+      }
+
+      // Store token and redirect
+      localStorage.setItem('token', data.token)
+      navigate('/')
     } catch (err) {
       console.error('Login error:', err)
       setError('Login failed. Please try again later.')
@@ -63,11 +76,12 @@ const Login = () => {
         <form onSubmit={handleLogin} className={voyagStyle.form}>
           <input
             type="text"
-            name="username"
-            placeholder="Username"
-            value={formData.username}
+            name="identifier"
+            placeholder="Username or email"
+            value={formData.identifier}
             onChange={handleChange}
             className={voyagStyle.input}
+            autoComplete="username"
             required
           />
           <input
@@ -77,6 +91,7 @@ const Login = () => {
             value={formData.password}
             onChange={handleChange}
             className={voyagStyle.input}
+            autoComplete="current-password"
             required
           />
           <button type="submit" className={voyagStyle.loginButton}>

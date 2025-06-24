@@ -1,17 +1,36 @@
 import { Link } from 'react-router'
 import voyagStyle from '../style/voyagStyle'
+import { useEffect, useState } from 'react'
 
 const Home = () => {
+  const [posts, setPosts] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState('')
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const response = await fetch('http://localhost:8080/api/posts')
+        if (!response.ok) throw new Error('Failed to fetch posts')
+
+        const data = await response.json()
+        setPosts(data || [])
+      } catch (err) {
+        setError(err.message || 'Something went wrong')
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchPosts()
+  }, [])
+
   return (
     <div className="space-y-20">
       {/* Hero Section */}
       <section className={voyagStyle.heroSection}>
-        <h1 className={voyagStyle.heroTitle}>
-          Explore the World with Voyaglog
-        </h1>
-        <p className={voyagStyle.heroSubtitle}>
-          Your personal travel blog and story hub
-        </p>
+        <h1 className={voyagStyle.heroTitle}>Explore the World with Voyaglog</h1>
+        <p className={voyagStyle.heroSubtitle}>Your personal travel blog and story hub</p>
         <Link to="/about" className={voyagStyle.heroButton}>
           Learn More
         </Link>
@@ -20,18 +39,33 @@ const Home = () => {
       {/* Latest Blogs */}
       <section className={voyagStyle.sectionContainer}>
         <h2 className={voyagStyle.sectionTitle}>Latest Adventures</h2>
+
+        {loading && <p>Loading posts...</p>}
+        {error && <p className="text-red-500">Error: {error}</p>}
+
+        {!loading && posts.length === 0 && (
+          <p className="text-base-content/70">No posts available.</p>
+        )}
+
         <div className={voyagStyle.blogGrid}>
-          {[1, 2, 3].map(id => (
-            <div key={id} className={voyagStyle.blogCardContainer}>
+          {posts.map((post) => (
+            <div key={post.id} className={voyagStyle.blogCardContainer}>
               <div className={voyagStyle.cardBody}>
-                <h3 className={voyagStyle.cardTitle}>
-                  Blog Title {id}
-                </h3>
+                <h3 className={voyagStyle.cardTitle}>{post.title}</h3>
                 <p className={voyagStyle.cardContent}>
-                  A short preview of the blog content goes here...
+                  {post.content.length > 100
+                    ? post.content.slice(0, 100) + '...'
+                    : post.content}
                 </p>
+                {post.image && (
+                  <img
+                    src={`http://localhost:8080/uploads/${post.image}`}
+                    alt={post.title}
+                    className={voyagStyle.featuredImage} // Add this class or your own styling
+                  />
+                )}
                 <div className="card-actions justify-end mt-4">
-                  <Link to={`/blog/${id}`} className={voyagStyle.readMoreButton}>
+                  <Link to={`/blog/${post.id}`} className={voyagStyle.readMoreButton}>
                     Read More
                   </Link>
                 </div>
@@ -43,10 +77,11 @@ const Home = () => {
 
       {/* CTA Section */}
       <section className={voyagStyle.ctaSection}>
-        <h2 className={voyagStyle.ctaTitle}>
-          Want to share your journey?
-        </h2>
-        <Link to="/login" className={voyagStyle.ctaButton}>
+        <h2 className={voyagStyle.ctaTitle}>Want to share your journey?</h2>
+        <Link
+          to={localStorage.getItem('token') ? '/dashboard' : '/login'}
+          className={voyagStyle.ctaButton}
+        >
           Start Blogging
         </Link>
       </section>

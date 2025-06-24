@@ -43,6 +43,9 @@ const Navbar = () => {
           >
             About
           </Link>
+          <Link to="/blogs" className='btn btn-ghost btn-sm px-4 rounded-md  hover:text-primary hover:bg-primary/10 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 transition'>
+          All Blogs
+          </Link>
 
           {isLoggedIn && (
             <Link
