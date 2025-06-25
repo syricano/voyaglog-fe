@@ -69,7 +69,7 @@ const Signup = () => {
       {error && <p className={voyagStyle.errorText}>{error}</p>}
       <form onSubmit={handleSubmit} className={voyagStyle.form}>
         <input type="text" name="firstName" placeholder="First Name" value={formData.firstName} onChange={handleChange} className={voyagStyle.input} required/>
-        <input type="text" name="lastName" placeholder="Last Name" value={formData.lasttName} onChange={handleChange} className={voyagStyle.input} required/>
+        <input type="text" name="lastName" placeholder="Last Name" value={formData.lastName} onChange={handleChange} className={voyagStyle.input} required/>
         <input type="text" name="username" placeholder="Username" value={formData.username} onChange={handleChange} className={voyagStyle.input} required/>
         <input type="phone" name="phone" placeholder="phone" value={formData.phone} onChange={handleChange} className={voyagStyle.input} />
         <input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange} className={voyagStyle.input} required/>
