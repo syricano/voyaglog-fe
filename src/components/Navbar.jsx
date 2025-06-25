@@ -118,10 +118,13 @@ const Navbar = () => {
       <div className="md:hidden bg-base-200 px-4 py-3 space-y-2 shadow-inner border-t border-base-300">
         <Link
           to="/"
-          className="block btn btn-ghost w-full rounded-md text-gray-700 hover:text-primary hover:bg-primary/10 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 transition"
+          className="block btn btn-ghost w-full rounded-md hover:text-primary hover:bg-primary/10 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 transition"
           onClick={() => setIsOpen(false)}
         >
           Home
+        </Link>
+        <Link to="/blogs" className='block btn btn-ghost w-full rounded-md  hover:text-primary hover:bg-primary/10 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 transition'>
+          All Blogs
         </Link>
         <Link
           to="/about"
