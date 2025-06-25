@@ -31,6 +31,7 @@ const Login = () => {
           identifier: formData.identifier,
           password: formData.password,
         }),
+        credentials: 'include',
       })
 
       let data
