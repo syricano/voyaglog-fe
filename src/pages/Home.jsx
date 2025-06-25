@@ -1,6 +1,10 @@
 import { Link } from 'react-router'
 import voyagStyle from '../style/voyagStyle'
 import { useEffect, useState } from 'react'
+import HeroFlip from '../components/HeroFlip'
+import front from '../assets/front.jpg'
+import back from '../assets/back.jpg'
+
 
 const Home = () => {
   const [posts, setPosts] = useState([])
@@ -29,8 +33,17 @@ const Home = () => {
     <div className="space-y-20">
       {/* Hero Section */}
       <section className={voyagStyle.heroSection}>
+        
         <h1 className={voyagStyle.heroTitle}>Explore the World with Voyaglog</h1>
         <p className={voyagStyle.heroSubtitle}>Your personal travel blog and story hub</p>
+        <HeroFlip
+        frontImage={front}
+        backImage={back}
+        altFront="Mountain View"
+        altBack="Sunset View"
+
+        />
+
         <Link to="/about" className={voyagStyle.heroButton}>
           Learn More
         </Link>
@@ -41,9 +54,12 @@ const Home = () => {
         <h2 className={voyagStyle.sectionTitle}>Latest Adventures</h2>
 
         {loading && <p>Loading posts...</p>}
-        {error && <p className="text-red-500">Error: {error}</p>}
-
-        {!loading && posts.length === 0 && (
+        {error && (
+          <p className="text-red-500">
+            Error loading posts. Please check your internet connection or try again later.
+          </p>
+        )}
+        {!loading && !error && posts.length === 0 && (
           <p className="text-base-content/70">No posts available.</p>
         )}
 

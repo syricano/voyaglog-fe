@@ -5,6 +5,12 @@ const voyagStyle = {
   formContainer: "max-w-2xl w-full bg-base-100 shadow-lg rounded-lg p-8 border border-base-300",
   cardBody: "card-body flex flex-col flex-grow gap-4",
 
+  // Dashboard
+
+  dashboardContainer:
+  "grid grid-flow-col grid-rows-3 gap-4",
+
+
   // === Hero Sections (Shared) ===
   heroSection: "text-center py-24 bg-base-200 rounded-lg shadow-lg mx-4 md:mx-0",
   heroTitle:
@@ -58,7 +64,9 @@ const voyagStyle = {
   textarea:
     "textarea textarea-bordered w-full focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition",
   submitButton:
-    "btn btn-primary w-full py-3 text-lg font-semibold shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-lg",
+    "btn btn-primary w-full p-6 text-lg font-semibold shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-lg",
+  uploadImageBtn:  
+    "inset-shadow-sm p-3 inset-shadow-indigo-500",
 
   // === Signup / Login Pages ===
   signupWrapper:
@@ -81,7 +89,7 @@ const voyagStyle = {
 
   // === Images ===
   featuredImage:
-    "w-full md:w-full rounded-lg shadow-lg hover:scale-105 transition-transform duration-300 ease-in-out cursor-pointer select-none",
+    "w-full max-w-xs h-auto rounded-md object-cover mt-4",
 
   // === Footer ===
   footer: "bg-base-200 text-base-content py-8 mt-20",

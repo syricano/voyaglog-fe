@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router'
 import ThemeToggle from './ThemeToggle'
+import DashboardMenu from './DashboardMenu'
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -22,7 +23,7 @@ const Navbar = () => {
         <div className="flex items-center gap-3">
           <Link
             to="/"
-            className="text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:brightness-110 transition-all duration-300"
+            className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:brightness-110 transition-all duration-300"
           >
             Voyaglog
           </Link>
@@ -33,33 +34,31 @@ const Navbar = () => {
         <div className="hidden md:flex space-x-6 items-center">
           <Link
             to="/"
-            className="btn btn-ghost btn-sm px-4 rounded-md  hover:text-primary hover:bg-primary/10 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 transition"
+            className="btn btn-ghost btn-sm md:btn-md px-4 rounded-md hover:text-primary hover:bg-primary/10 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 transition md:text-lg"
           >
             Home
           </Link>
           <Link
             to="/about"
-            className="btn btn-ghost btn-sm px-4 rounded-md  hover:text-primary hover:bg-primary/10 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 transition"
+            className="btn btn-ghost btn-sm md:btn-md px-4 rounded-md hover:text-primary hover:bg-primary/10 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 transition md:text-lg"
           >
             About
           </Link>
-          <Link to="/blogs" className='btn btn-ghost btn-sm px-4 rounded-md  hover:text-primary hover:bg-primary/10 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 transition'>
-          All Blogs
+          <Link
+            to="/blogs"
+            className="btn btn-ghost btn-sm md:btn-md px-4 rounded-md hover:text-primary hover:bg-primary/10 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 transition md:text-lg"
+          >
+            All Blogs
           </Link>
 
           {isLoggedIn && (
-            <Link
-              to="/dashboard"
-              className="btn btn-ghost btn-sm px-4 rounded-md  hover:text-primary hover:bg-primary/10 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 transition"
-            >
-              Dashboard
-            </Link>
+            <DashboardMenu setIsOpen={setIsOpen} />
           )}
 
           {isLoggedIn ? (
             <button
               onClick={handleLogout}
-              className="btn btn-error btn-sm px-4 rounded-md text-white shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-error focus:ring-offset-1 transition"
+              className="btn btn-error btn-sm md:btn-md px-4 rounded-md text-white shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-error focus:ring-offset-1 transition md:text-lg"
             >
               Logout
             </button>
@@ -67,19 +66,20 @@ const Navbar = () => {
             <>
               <Link
                 to="/login"
-                className="btn btn-primary btn-sm px-4 rounded-md text-white shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 transition"
+                className="btn btn-primary btn-sm md:btn-md px-4 rounded-md text-white shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 transition md:text-lg"
               >
                 Login
               </Link>
               <Link
                 to="/signup"
-                className="btn btn-secondary btn-sm px-4 rounded-md text-white shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-1 transition"
+                className="btn btn-secondary btn-sm md:btn-md px-4 rounded-md text-white shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-1 transition md:text-lg"
               >
                 Signup
               </Link>
             </>
           )}
         </div>
+
 
         {/* Mobile Burger Button */}
         <button
@@ -135,13 +135,7 @@ const Navbar = () => {
         </Link>
 
         {isLoggedIn && (
-          <Link
-            to="/dashboard"
-            className="block btn btn-ghost w-full rounded-md  hover:text-primary hover:bg-primary/10 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 transition"
-            onClick={() => setIsOpen(false)}
-          >
-            Dashboard
-          </Link>
+          <DashboardMenu setIsOpen={setIsOpen} />
         )}
 
         {isLoggedIn ? (

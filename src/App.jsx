@@ -4,12 +4,12 @@ import ProtectedLayout from './layouts/ProtectedLayout'
 import Home from './pages/Home'
 import About from './pages/About'
 import BlogDetails from './pages/BlogDetails'
-import Dashboard from './pages/Dashboard'
 import Login from './pages/Login'
 import Signup from './pages/signup';
 import Contact from './pages/Contact'
 import Blogs from './pages/Blogs';
-
+import ManageBlogs from './pages/ManageBlogs';
+import UserProfile from './pages/UserProfile';
 
 function App() {
   return (
@@ -28,7 +28,8 @@ function App() {
 
         {/* Protected Routes with Auth Layout */}
         <Route element={<ProtectedLayout />}>
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/manage-blogs" element={<ManageBlogs />} />
+          <Route path="/user-profile" element={<UserProfile />} />
         </Route>
       </Routes>
     </Router>

@@ -46,7 +46,7 @@ const BlogDetails = () => {
         <img
           src={`http://localhost:8080/uploads/${blog.image}`}
           alt={blog.title}
-          className={voyagStyle.blogDetailsImage}
+          className={voyagStyle.featuredImage}
         />
       )}
 
