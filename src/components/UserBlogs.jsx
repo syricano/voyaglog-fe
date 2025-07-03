@@ -196,16 +196,27 @@ const UserBlogs = ({
               />
             </div>
 
-            <div className="mb-4">
-              <label className="block font-semibold mb-1">Upload Image (optional)</label>
-              <input type="file" accept="image/*" onChange={handleImageChange} />
-              {previewUrl && (
-                <img
-                  src={previewUrl}
-                  alt="Preview"
-                  className={`${voyagStyle.featuredImage} mt-4`}
+            <div className="mb-6">
+              <label className="block text-sm font-medium mb-2 text-base-content">
+                Upload Image (optional)
+              </label>
+              <div className="flex items-center gap-3">
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageChange}
+                  className="file-input file-input-bordered file-input-primary w-full max-w-xs h-9 min-h-8 text-xs"
                 />
-              )}
+                {previewUrl && (
+                  <div className="border border-neutral/20 dark:border-neutral/40 rounded-md p-0.5">
+                    <img
+                      src={previewUrl}
+                      alt="Preview"
+                      className="max-h-20 object-contain rounded-sm"
+                    />
+                  </div>
+                )}
+              </div>
             </div>
 
             <button type="submit" className={voyagStyle.submitButton}>

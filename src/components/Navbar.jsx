@@ -135,7 +135,7 @@ const Navbar = () => {
         </Link>
 
         {isLoggedIn && (
-          <DashboardMenu setIsOpen={setIsOpen} />
+          <DashboardMenu className="text-center md:text-left" setIsOpen={setIsOpen} />
         )}
 
         {isLoggedIn ? (

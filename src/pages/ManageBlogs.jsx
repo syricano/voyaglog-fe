@@ -15,9 +15,9 @@ const ManageBlogs = () => {
   };
 
 return (
-  <div className="h-screen flex gap-6 px-4 py-6">
-    {/* Left column: Add Blog (1/3 width) */}
-    <div className="w-1/3 flex flex-col">
+  <div className="h-screen flex flex-col md:flex-row gap-6 px-4 py-6">
+    {/* Left column: Add Blog (1/3 width on md+, full width on small) */}
+    <div className="md:w-1/3 w-full flex flex-col">
       <h1 className="text-2xl font-bold mb-4">Add Blog</h1>
       <div className="flex-grow overflow-auto border rounded-md border-base-300 p-4">
         <UserBlogs
@@ -37,8 +37,8 @@ return (
       </div>
     </div>
 
-    {/* Right column: My Blogs (2/3 width) */}
-    <div className="w-2/3 flex flex-col">
+    {/* Right column: My Blogs (2/3 width on md+, full width on small) */}
+    <div className="md:w-2/3 w-full flex flex-col">
       <h2 className="text-xl font-semibold mb-4">My Blogs</h2>
       <div className="flex-grow overflow-auto border rounded-md border-base-300 p-4">
         <UserBlogs
@@ -59,6 +59,7 @@ return (
     </div>
   </div>
 );
+
 
 
 };

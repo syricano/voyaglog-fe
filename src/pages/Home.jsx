@@ -95,7 +95,7 @@ const Home = () => {
       <section className={voyagStyle.ctaSection}>
         <h2 className={voyagStyle.ctaTitle}>Want to share your journey?</h2>
         <Link
-          to={localStorage.getItem('token') ? '/dashboard' : '/login'}
+          to={localStorage.getItem('token') ? '/manage-blogs' : '/login'}
           className={voyagStyle.ctaButton}
         >
           Start Blogging
